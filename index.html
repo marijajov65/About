@@ -15,15 +15,19 @@
 
     <style>
         :root {
-            --primary-taupe: #483C32;
-            --secondary-taupe: #6B5B47;
+            --primary-taupe: #6B5B47;
+            --secondary-taupe: #7A6A56;
             --light-taupe: #8B7D6B;
             --lightest-taupe: #A69B8A;
             --cream: #F5F2ED;
             --off-white: #FDFCF9;
-            --text-dark: #2d3748;
-            --text-light: #718096;
-            --shadow: rgba(72, 60, 50, 0.15);
+            --warm-white: #FAF7F2;
+            --text-dark: #3A342E;
+            --text-medium: #5A544E;
+            --text-light: #7A746E;
+            --accent-gold: #B8860B;
+            --shadow: rgba(107, 91, 71, 0.2);
+            --shadow-light: rgba(107, 91, 71, 0.1);
         }
 
         * {
@@ -34,9 +38,10 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            line-height: 1.6;
+            line-height: 1.7;
             color: var(--text-dark);
             overflow-x: hidden;
+            background: var(--warm-white);
         }
 
         html {
@@ -63,24 +68,25 @@
             top: 0;
             width: 100%;
             z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
+            padding: 1.2rem 0;
+            transition: all 0.4s ease;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
         }
 
         .navbar.scrolled {
-            background: rgba(253, 252, 249, 0.95);
-            box-shadow: 0 4px 20px var(--shadow);
+            background: rgba(250, 248, 243, 0.95);
+            box-shadow: 0 4px 30px var(--shadow-light);
+            padding: 0.8rem 0;
         }
 
         .navbar-brand {
             font-family: 'Playfair Display', serif;
             font-weight: 600;
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: var(--primary-taupe) !important;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s ease;
         }
 
         .navbar.scrolled .navbar-brand {
@@ -90,25 +96,29 @@
         .navbar-nav .nav-link {
             color: var(--text-dark) !important;
             font-weight: 500;
-            margin: 0 1rem;
+            margin: 0 1.5rem;
             position: relative;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
         }
 
         .navbar-nav .nav-link::after {
             content: '';
             position: absolute;
-            bottom: -5px;
-            left: 0;
+            bottom: -8px;
+            left: 50%;
             width: 0;
             height: 2px;
-            background: var(--primary-taupe);
-            transition: width 0.3s ease;
+            background: var(--accent-gold);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
         }
 
         .navbar-nav .nav-link:hover::after,
         .navbar-nav .nav-link.active::after {
-            width: 100%;
+            width: 30px;
         }
 
         /* Hero Section */
@@ -118,16 +128,7 @@
             align-items: center;
             position: relative;
             overflow: hidden;
-        }
-
-        .hero-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -2;
+            background: linear-gradient(135deg, var(--primary-taupe) 0%, var(--secondary-taupe) 100%);
         }
 
         .hero::before {
@@ -137,251 +138,299 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(72, 60, 50, 0.4);
-            z-index: -1;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="%23ffffff" opacity="0.05"/><circle cx="80" cy="40" r="0.5" fill="%23ffffff" opacity="0.03"/><circle cx="40" cy="80" r="1.5" fill="%23ffffff" opacity="0.04"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+            z-index: 1;
         }
 
         .hero-content {
-            z-index: 1;
-            animation: fadeInUp 1s ease-out;
+            z-index: 2;
+            position: relative;
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
             font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+            color: var(--off-white);
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            line-height: 1.1;
         }
 
-        .hero p {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: white;
-            margin-bottom: 0;
+        .hero-subtitle {
+            font-size: clamp(1.3rem, 3vw, 2rem);
+            color: var(--lightest-taupe);
+            margin-bottom: 2rem;
             opacity: 0.9;
         }
 
-        /* Remove geometric shapes */
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--off-white);
+            max-width: 600px;
+            line-height: 1.8;
+            opacity: 0.8;
+        }
 
         /* Sections */
         .section {
-            padding: 6rem 0;
+            padding: 8rem 0;
+            position: relative;
         }
 
         .section:nth-child(even) {
-            background-color: var(--primary-beige);
+            background: var(--cream);
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 5rem;
         }
 
         .section-title h2 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 700;
-            color: var(--dark-beige);
-            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 600;
+            color: var(--primary-taupe);
+            margin-bottom: 1.5rem;
+            position: relative;
         }
 
-        .section-title p {
-            font-size: 1.2rem;
-            color: var(--text-light);
-            max-width: 600px;
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-gold);
+            transform: translateX(-50%);
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-medium);
+            max-width: 700px;
             margin: 0 auto;
+            line-height: 1.8;
         }
 
-        /* Cards */
-        .card {
-            border: none;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px var(--shadow);
-            transition: all 0.3s ease;
-            background: var(--white);
+        /* Story Cards */
+        .story-card {
+            background: var(--off-white);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px var(--shadow);
+            transition: all 0.4s ease;
+            border: 1px solid var(--lightest-taupe);
+            position: relative;
             overflow: hidden;
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(139, 115, 85, 0.15);
-        }
-
-        .card::before {
+        .story-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, var(--light-taupe), var(--primary-taupe));
+            background: linear-gradient(90deg, var(--accent-gold), var(--primary-taupe));
         }
 
-        .card-body {
-            padding: 2rem;
-            position: relative;
+        .story-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 80px var(--shadow);
         }
 
-        /* Skill Items */
+        .story-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--lightest-taupe);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .story-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-taupe);
+            margin-bottom: 1rem;
+        }
+
+        .story-period {
+            color: var(--accent-gold);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .story-content {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            line-height: 1.8;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
         .skill-item {
             background: var(--off-white);
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px var(--shadow);
-            transition: transform 0.3s ease;
+            padding: 2rem 1.5rem;
+            border-radius: 16px;
             text-align: center;
-            border: 1px solid var(--cream);
+            border: 1px solid var(--lightest-taupe);
+            transition: all 0.3s ease;
         }
 
         .skill-item:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            background: var(--warm-white);
         }
 
-        .skill-item h5 {
-            color: var(--primary-taupe);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .skill-item p {
-            color: var(--text-light);
-            margin: 0;
-            font-size: 0.95rem;
-        }
-
-        /* Portfolio Items */
-        .portfolio-item {
-            background: var(--off-white);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 35px var(--shadow);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .portfolio-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(72, 60, 50, 0.2);
-        }
-
-        .portfolio-image {
-            height: 200px;
-            background: linear-gradient(135deg, var(--light-taupe), var(--lightest-taupe));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .portfolio-image i {
-            font-size: 3rem;
-            color: var(--primary-taupe);
-            opacity: 0.8;
-        }
-
-        .portfolio-content {
-            padding: 1.5rem;
-        }
-
-        .portfolio-content h5 {
-            color: var(--text-dark);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .portfolio-content p {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin: 0;
-        }
-
-        /* Contact Items */
-        .contact-item {
-            background: var(--off-white);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px var(--shadow);
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .contact-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .contact-item i {
+        .skill-icon {
             font-size: 2.5rem;
             color: var(--primary-taupe);
             margin-bottom: 1rem;
         }
 
-        .contact-item h5 {
+        .skill-title {
+            font-size: 1.1rem;
+            font-weight: 600;
             color: var(--text-dark);
             margin-bottom: 0.5rem;
         }
 
-        .contact-item a {
-            color: var(--primary-taupe);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .contact-item a:hover {
-            color: var(--light-taupe);
-        }
-
-        /* Social Links */
-        .social-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: var(--light-taupe);
-            border-radius: 50%;
-            color: var(--off-white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            margin: 0 0.5rem;
-        }
-
-        .social-link:hover {
-            background: var(--primary-taupe);
-            color: var(--off-white);
-            transform: translateY(-3px);
-        }
-
-        /* Stats */
-        .stat-item {
-            text-align: center;
-            padding: 1.5rem;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary-taupe);
-            display: block;
-        }
-
-        .stat-label {
-            color: var(--text-light);
+        .skill-description {
             font-size: 0.9rem;
-            margin-top: 0.5rem;
+            color: var(--text-light);
+            line-height: 1.6;
         }
 
-        /* Footer */
-        .footer {
-            background: var(--text-dark);
-            color: var(--white);
-            text-align: center;
+        /* Journey Timeline */
+        .journey-timeline {
+            position: relative;
             padding: 2rem 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--lightest-taupe);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+        }
+
+        .timeline-content {
+            background: var(--off-white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px var(--shadow-light);
+            border: 1px solid var(--lightest-taupe);
+            width: calc(50% - 2rem);
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-right: auto;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-gold);
+            border: 4px solid var(--off-white);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background: var(--off-white);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid var(--lightest-taupe);
+            transition: all 0.4s ease;
+            text-decoration: none;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 60px var(--shadow);
+            text-decoration: none;
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            color: var(--primary-taupe);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        /* Buttons */
+        .btn-primary-custom {
+            background: var(--primary-taupe);
+            border: 2px solid var(--primary-taupe);
+            color: var(--off-white);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary-custom:hover {
+            background: transparent;
+            color: var(--primary-taupe);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px var(--shadow);
         }
 
         /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(50px);
             }
             to {
                 opacity: 1;
@@ -389,22 +438,10 @@
             }
         }
 
-        @keyframes geometricFloat {
-            0%, 100% {
-                transform: translateY(0px) rotate(0deg);
-            }
-            33% {
-                transform: translateY(-20px) rotate(120deg);
-            }
-            66% {
-                transform: translateY(-10px) rotate(240deg);
-            }
-        }
-
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
         }
 
         .fade-in.visible {
@@ -412,15 +449,124 @@
             transform: translateY(0);
         }
 
+        /* Typing Animation */
+        #typed-word::after {
+            content: "_";
+            display: inline-block;
+            margin-left: 4px;
+            animation: blink 0.8s infinite;
+            color: var(--accent-gold);
+        }
+
+        @keyframes blink {
+            0%, 50%, 100% {
+                opacity: 1;
+            }
+            25%, 75% {
+                opacity: 0;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: var(--off-white);
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero {
-                min-height: 70vh;
+                min-height: 85vh;
             }
 
             .section {
-                padding: 4rem 0;
+                padding: 5rem 0;
             }
+
+            .timeline-line {
+                display: none;
+            }
+
+            .timeline-content {
+                width: 100% !important;
+                margin: 0 !important;
+            }
+
+            .timeline-dot {
+                display: none;
+            }
+
+            .navbar-nav .nav-link {
+                margin: 0.5rem 0;
+            }
+        }
+
+        /* Passion Icons */
+        .passion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .passion-card {
+            background: var(--off-white);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            border: 1px solid var(--lightest-taupe);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .passion-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--lightest-taupe) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .passion-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .passion-card:hover {
+            transform: translateY(-10px) rotate(1deg);
+            box-shadow: 0 20px 50px var(--shadow);
+        }
+
+        .passion-icon {
+            font-size: 3rem;
+            color: var(--primary-taupe);
+            margin-bottom: 1.5rem;
+        }
+
+        .passion-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .passion-description {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            line-height: 1.6;
         }
     </style>
 </head>
@@ -429,8 +575,8 @@
 <nav class="navbar navbar-expand-lg" id="navbar">
     <div class="container">
         <a class="navbar-brand" href="#hero">Marija</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="color: var(--primary-taupe);">
+            <i class="fas fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
@@ -438,16 +584,16 @@
                     <a class="nav-link active" href="#hero">Hello</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#about">About</a>
+                    <a class="nav-link" href="#story">Story</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#resume">Resume</a>
+                    <a class="nav-link" href="#journey">Journey</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#portfolio">Portfolio</a>
+                    <a class="nav-link" href="#passions">Passions</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#contact">Contact</a>
+                    <a class="nav-link" href="#contact">Connect</a>
                 </li>
             </ul>
         </div>
@@ -456,183 +602,193 @@
 
 <!-- Hero Section -->
 <section id="hero" class="hero">
-    <video class="hero-video" autoplay muted loop>
-        <source src="assets/video/bg_video.mp4" type="video/mp4">
-    </video>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-8 text-center hero-content">
+            <div class="col-lg-10 text-center hero-content">
                 <h1>Marija Jovicic</h1>
-                <p><span id="typed-word">Software Engineer</span>based in Chicago</p>
+                <p class="hero-subtitle"><span id="typed-word">Software Engineer</span> based in Chicago</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- About Section -->
-<section id="about" class="section">
+<!-- Story Section -->
+<section id="story" class="section">
     <div class="container">
         <div class="section-title fade-in">
-            <h2>About Me</h2>
-            <p>
-                Full-time software engineer, former D1 tennis player, marathon survivor, and amateur painter.
-                Currently working on a certificate in UX design so I can make my apps slightly less confusing.
+            <h2>My Story</h2>
+            <p class="section-subtitle">
+                My path from college athlete to software engineer
             </p>
         </div>
 
-        <div class="row align-items-start mb-5 fade-in">
-            <div class="col-lg-4 mb-4">
-                <div class="text-center">
-                    <img src="assets/img/profile-img.jpg" alt="Marija Jovicic" class="img-fluid rounded-4 shadow"
-                         style="max-height: 400px; object-fit: cover;">
-                </div>
-            </div>
-            <div class="col-lg-8">
-                <h3 class="mb-3" style="color: var(--dark-beige);">Software Engineer @ Gelber Group</h3>
-                <p class="mb-3">At Gelber Group, I develop services, web apps, and desktop apps that support a wide
-                    range of users - from traders to compliance team. Being in the trading industry, a lot of my work
-                    involves careful handling of large streams of market data while guaranteeing correctness, high
-                    availability, and responsiveness.</p>
-
-                <div class="row g-3 mt-4">
-                    <div class="col-md-6">
-                        <div class="skill-item">
-                            <h5>Core Language</h5>
-                            <p>C# (.NET)</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="skill-item">
-                            <h5>Others</h5>
-                            <p>Python, JavaScript, React, Java, SQL</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="skill-item">
-                            <h5>Operating Systems</h5>
-                            <p>Windows & Linux</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="skill-item">
-                            <h5>Tools</h5>
-                            <p>Kafka, JetBrains suite, Jira, Confluence</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- But Also Section -->
-        <div class="row align-items-center mt-5 fade-in">
-            <div class="col-12 text-center mb-4">
-                <h3 style="color: var(--dark-beige);">But also...</h3>
-            </div>
-
-            <!-- Tennis -->
-            <div class="col-md-3 mb-4">
-                <div class="portfolio-item position-relative overflow-hidden rounded-4 shadow" style="cursor:pointer;">
-                    <img src="assets/img/tennis.jpg" alt="Tennis" class="img-fluid">
-                    <div class="portfolio-content position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center text-center"
-                         style="background: rgba(72,60,50,0.7); color: white; opacity: 0; transition: opacity 0.3s;">
-                        <h3>Former D1 College Tennis Player</h3>
+        <div class="row g-4 fade-in">
+            <div class="col-lg-4">
+                <div class="story-card h-100">
+                    <div class="story-number">01</div>
+                    <h3 class="story-title">The Foundation</h3>
+                    <div class="story-period">2017 - 2022</div>
+                    <div class="story-content">
+                        At DePaul, I learned that the same focus I used on the tennis court worked in computer science classes too.
+                        Managing a full course load while training and competing taught me how to prioritize and work efficiently.
+                        <br><br>
+                        Ended up with a 4.0 GPA and some nice recognition, but more importantly,
+                        I figured out that I genuinely enjoyed solving technical problems and building things.
                     </div>
                 </div>
             </div>
 
-            <!-- Marathon -->
-            <div class="col-md-3 mb-4">
-                <div class="portfolio-item position-relative overflow-hidden rounded-4 shadow" style="cursor:pointer;">
-                    <img src="assets/img/marathon.png" alt="Marathon" class="img-fluid">
-                    <div class="portfolio-content position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center text-center"
-                         style="background: rgba(72,60,50,0.7); color: white; opacity: 0; transition: opacity 0.3s;">
-                        <h3>San Francisco Marathon Finisher</h3>
+            <div class="col-lg-4">
+                <div class="story-card h-100">
+                    <div class="story-number">02</div>
+                    <h3 class="story-title">The Exploration</h3>
+                    <div class="story-period">2019 - 2020</div>
+                    <div class="story-content">
+                        Two internships taught me different things. At Wintrust, I saw how software affects real people's finances,
+                        which made me care more about getting things right. The IAESTE exchange to Serbia was unexpected -
+                        working on medical applications in a different culture showed me how technology problems are universal.
+                        <br><br>
+                        Both experiences pushed me out of my comfort zone and helped me understand
+                        that good software isn't just about the code - it's about the people using it.
                     </div>
                 </div>
             </div>
 
-            <!-- Art -->
-            <div class="col-md-3 mb-4">
-                <div class="portfolio-item position-relative overflow-hidden rounded-4 shadow" style="cursor:pointer;">
-                    <img src="assets/img/art.jpeg" alt="Art" class="img-fluid">
-                    <div class="portfolio-content position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center text-center"
-                         style="background: rgba(72,60,50,0.7); color: white; opacity: 0; transition: opacity 0.3s;">
-                        <h3>Amateur Painter</h3>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Travel -->
-            <div class="col-md-3 mb-4">
-                <div class="portfolio-item position-relative overflow-hidden rounded-4 shadow" style="cursor:pointer;">
-                    <img src="assets/img/travel.jpeg" alt="Travel" class="img-fluid">
-                    <div class="portfolio-content position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center text-center"
-                         style="background: rgba(72,60,50,0.7); color: white; opacity: 0; transition: opacity 0.3s;">
-                        <h3>Traveler of 20+ countries</h3>
+            <div class="col-lg-4">
+                <div class="story-card h-100">
+                    <div class="story-number">03</div>
+                    <h3 class="story-title">The Evolution</h3>
+                    <div class="story-period">2022 - Present</div>
+                    <div class="story-content">
+                        At Gelber Group, I work on systems where performance actually matters.
+                        Trading happens fast, data streams are constant, and if something breaks, people notice immediately.
+                        <br><br>
+                        I've built desktop trading interfaces, web dashboards for risk management, and algorithms that
+                        distribute computing resources fairly. It's technical work that has real impact,
+                        and I like that combination of challenge and responsibility.
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Hover Effect Script -->
-        <script>
-            document.querySelectorAll('.portfolio-item').forEach(item => {
-                const overlay = item.querySelector('.portfolio-content');
-                item.addEventListener('mouseenter', () => overlay.style.opacity = '1');
-                item.addEventListener('mouseleave', () => overlay.style.opacity = '0');
-            });
-        </script>
+        <!-- Skills Grid -->
+        <div class="skills-grid fade-in">
+            <div class="skill-item">
+                <div class="skill-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div class="skill-title">Core Engineering</div>
+                <div class="skill-description">C# (.NET), Python, Java, JavaScript - Building robust, scalable applications</div>
+            </div>
+
+            <div class="skill-item">
+                <div class="skill-icon">
+                    <i class="fas fa-desktop"></i>
+                </div>
+                <div class="skill-title">Full-Stack Development</div>
+                <div class="skill-description">React frontends, WPF desktop apps, RESTful APIs, and database design</div>
+            </div>
+
+            <div class="skill-item">
+                <div class="skill-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="skill-title">Financial Technology</div>
+                <div class="skill-description">Real-time data processing, trading systems, risk management platforms</div>
+            </div>
+
+            <div class="skill-item">
+                <div class="skill-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <div class="skill-title">System Architecture</div>
+                <div class="skill-description">Kafka streaming, microservices, high-availability system design</div>
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- Resume Section -->
-<section id="resume" class="section">
+<!-- Journey Section -->
+<section id="journey" class="section">
     <div class="container">
         <div class="section-title fade-in">
-            <h2>Experience & Education</h2>
-            <p>My professional journey and academic background</p>
+            <h2>Professional Journey</h2>
+            <p class="section-subtitle">
+                Each step built on the last - from learning fundamentals to tackling real problems.
+            </p>
+
+            <div class="text-center mt-4">
+                <button id="downloadResume" class="btn-primary-custom">
+                    <i class="fas fa-download me-2"></i>Download Full Resume
+                </button>
+            </div>
         </div>
 
-        <div class="row g-4 fade-in">
-            <div class="col-lg-6">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h4 class="card-title" style="color: var(--dark-beige);">Professional Experience</h4>
-                        <h5 class="mt-3">Software Engineer</h5>
-                        <p class="text-muted">2022 - Present | Gelber Group, Chicago, IL</p>
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-chevron-right me-2" style="color: var(--dark-beige);"></i>Desktop
-                                trading platform UI development
-                            </li>
-                            <li class="mb-2"><i class="fas fa-chevron-right me-2" style="color: var(--dark-beige);"></i>Web
-                                dashboard for repo trading risk management
-                            </li>
-                            <li class="mb-2"><i class="fas fa-chevron-right me-2" style="color: var(--dark-beige);"></i>Algorithm for equitable allocation of resources across backtesting strategies
-                            </li>
-                        </ul>
+        <div class="journey-timeline fade-in">
+            <div class="timeline-line"></div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h4 style="color: var(--primary-taupe); margin-bottom: 0.5rem;">Software Engineer</h4>
+                    <h6 style="color: var(--accent-gold); font-weight: 600;">Gelber Group • 2022 - Present</h6>
+                    <p style="margin-top: 1rem;">
+                        Leading development of trading infrastructure and risk management systems.
+                        Building the tools that traders use to make decisions and ensuring data flows reliably.
+                    </p>
+                    <div style="margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">Trading Systems</span>
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">Real-time Processing</span>
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">Algorithm Design</span>
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-6">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h4 class="card-title" style="color: var(--dark-beige);">Education & Athletics</h4>
-                        <h5 class="mt-3">BS and MS in Computer Science</h5>
-                        <p class="text-muted">2017 - 2022 | Division I Tennis Scholarship</p>
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-chevron-right me-2" style="color: var(--dark-beige);"></i>Full
-                                athletic scholarship recipient
-                            </li>
-                            <li class="mb-2"><i class="fas fa-chevron-right me-2" style="color: var(--dark-beige);"></i>Competed
-                                at NCAA Division I level
-                            </li>
-                            <li class="mb-2"><i class="fas fa-chevron-right me-2" style="color: var(--dark-beige);"></i>Strong
-                                foundation in algorithms and data structures
-                            </li>
-                            <li><i class="fas fa-chevron-right me-2" style="color: var(--dark-beige);"></i>Currently
-                                pursuing UX Design Certificate
-                            </li>
-                        </ul>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h4 style="color: var(--primary-taupe); margin-bottom: 0.5rem;">Academic Leadership</h4>
+                    <h6 style="color: var(--accent-gold); font-weight: 600;">DePaul University • 2019 - 2022</h6>
+                    <p style="margin-top: 1rem;">
+                        Teaching computer science concepts to struggling students.
+                        Helped me understand how to explain technical ideas clearly and patiently.
+                    </p>
+                    <div style="margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">Mentoring</span>
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">Technical Communication</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h4 style="color: var(--primary-taupe); margin-bottom: 0.5rem;">Global Experience</h4>
+                    <h6 style="color: var(--accent-gold); font-weight: 600;">Mihajlo Pupin Institute, Serbia • 2020</h6>
+                    <p style="margin-top: 1rem;">
+                        International exchange program working on medical research applications.
+                        Good experience seeing how different teams approach technical problems.
+                    </p>
+                    <div style="margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">International Collaboration</span>
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">Medical Technology</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h4 style="color: var(--primary-taupe); margin-bottom: 0.5rem;">Financial Technology Foundations</h4>
+                    <h6 style="color: var(--accent-gold); font-weight: 600;">Wintrust Financial • 2019</h6>
+                    <p style="margin-top: 1rem;">
+                        My first deep dive into financial technology, where I learned that code isn't just logic—it's responsibility.
+                        Building credit checking systems taught me the importance of precision in finance.
+                    </p>
+                    <div style="margin-top: 1.5rem;">
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; margin-right: 0.5rem;">FinTech</span>
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; margin-right: 0.5rem;">Agile Development</span>
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem;">Testing</span>
                     </div>
                 </div>
             </div>
@@ -640,95 +796,95 @@
     </div>
 </section>
 
-<!-- Portfolio Section -->
-<section id="portfolio" class="section">
+<!-- Passions Section -->
+<section id="passions" class="section">
     <div class="container">
         <div class="section-title fade-in">
-            <h2>Recent Projects</h2>
-            <p>Cool stuff I work(ed) on</p>
+            <h2>Beyond Code</h2>
+            <p class="section-subtitle">
+                Things outside of work that keep me grounded and give me perspective.
+            </p>
         </div>
 
-        <div class="row g-4 fade-in">
-            <div class="col-lg-4 col-md-6">
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <i class="fas fa-desktop"></i>
-                    </div>
-                    <div class="portfolio-content">
-                        <h5>Desktop Trading Platform UI</h5>
-                        <p>Real-time trading interface with advanced charting and order management capabilities.</p>
-                    </div>
+        <div class="passion-grid fade-in">
+            <div class="passion-card">
+                <div class="passion-icon">
+                    <i class="fas fa-running"></i>
+                </div>
+                <div class="passion-title">Athletic Excellence</div>
+                <div class="passion-description">
+                    Former Division I tennis player and San Francisco Marathon finisher.
+                    Sports taught me how to stick with difficult things and perform when it matters.
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6">
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="portfolio-content">
-                        <h5>Risk Management Dashboard</h5>
-                        <p>Web-based dashboard for monitoring and managing repo trading risks with real-time data
-                            visualization.</p>
-                    </div>
+            <div class="passion-card">
+                <div class="passion-icon">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <div class="passion-title">Creative Expression</div>
+                <div class="passion-description">
+                    I paint sometimes - not great at it yet, but I like figuring out colors and light.
+                    It's a different kind of problem-solving that helps me think about things differently.
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6">
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <div class="portfolio-content">
-                        <h5>Resource Allocation Algorithm</h5>
-                        <p>Fair allocation system for distributing computational resources across multiple backtesting
-                            strategies.</p>
-                    </div>
+            <div class="passion-card">
+                <div class="passion-icon">
+                    <i class="fas fa-globe-americas"></i>
+                </div>
+                <div class="passion-title">Global Explorer</div>
+                <div class="passion-description">
+                    Been to 20+ countries. Travel is the best way I've found to get out of your own assumptions
+                    and see how other people solve problems.
+                </div>
+            </div>
+
+            <div class="passion-card">
+                <div class="passion-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="passion-title">Continuous Learning</div>
+                <div class="passion-description">
+                    Working on UX design certification because I want to build software that's actually usable.
+                    Good interfaces shouldn't require a manual.
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 <!-- Contact Section -->
 <section id="contact" class="section">
     <div class="container">
         <div class="section-title fade-in">
             <h2>Let's Connect</h2>
-            <p>Let's chat about fun software projects, UX trends, new tennis stars, or cool art!</p>
+            <p class="section-subtitle">
+                Whether you want to talk tech, swap travel stories, or collaborate on something interesting - let's chat.
+            </p>
         </div>
 
-        <div class="row justify-content-center fade-in">
-            <div class="col-lg-8">
-                <div class="row g-4 text-center">
-                    <div class="col-md-4">
-                        <a href="mailto:marijajovicic65@gmail.com" class="text-decoration-none">
-                            <div class="contact-item p-5 shadow rounded h-100">
-                                <i class="fas fa-envelope fa-2x mb-3"></i>
-                                <h5>Email</h5>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-md-4">
-                        <a href="https://www.linkedin.com/in/marijajovicic/" target="_blank"
-                           class="text-decoration-none">
-                            <div class="contact-item p-5 shadow rounded h-100">
-                                <i class="fab fa-linkedin fa-2x mb-3"></i>
-                                <h5>LinkedIn</h5>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-md-4">
-                        <a href="https://github.com/marijajov65" target="_blank" class="text-decoration-none">
-                            <div class="contact-item p-5 shadow rounded h-100">
-                                <i class="fab fa-github fa-2x mb-3"></i>
-                                <h5>GitHub</h5>
-                            </div>
-                        </a>
-                    </div>
+        <div class="contact-grid fade-in">
+            <a href="mailto:marijajovicic65@gmail.com" class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-envelope"></i>
                 </div>
-            </div>
+                <div class="contact-title">Email Me</div>
+            </a>
+
+            <a href="https://www.linkedin.com/in/marijajovicic/" target="_blank" class="contact-card">
+                <div class="contact-icon">
+                    <i class="fab fa-linkedin"></i>
+                </div>
+                <div class="contact-title">Connect on LinkedIn</div>
+            </a>
+
+            <a href="https://github.com/marijajov65" target="_blank" class="contact-card">
+                <div class="contact-icon">
+                    <i class="fab fa-github"></i>
+                </div>
+                <div class="contact-title">Explore My Code</div>
+            </a>
         </div>
     </div>
 </section>
@@ -736,79 +892,56 @@
 <!-- Footer -->
 <footer class="footer">
     <div class="container">
-        <p>&copy; 2025 Marija Jovicic. Crafted with passion and caffeine.</p>
+        <p>&copy; 2025 Marija Jovicic. Crafted with precision, passion, and just the right amount of caffeine.</p>
     </div>
 </footer>
-
-<style>
-/* Blinking cursor on the typed word */
-#typed-word::after {
-    content: "_";
-    display: inline-block;
-    margin-left: 2px;
-    animation: blink 0.7s infinite;
-}
-
-@keyframes blink {
-    0%, 50%, 100% { opacity: 1; }
-    25%, 75% { opacity: 0; }
-}
-</style>
-
-<script>
-const roles = ["Software Engineer", "Tennis Player", "Artist"];
-const typingSpeed = 100;
-const erasingSpeeds = [50, 30, 30];
-const delayBetween = 1500;
-let roleIndex = 0;
-let charIndex = 0;
-let typing = true;
-let loopCount = 0;
-
-const typedWordEl = document.getElementById("typed-word");
-
-function type() {
-    // stop if we finished the final Software Engineer
-    if (loopCount === 1 && roleIndex === 0 && charIndex === roles[0].length) return;
-
-    if (typing) {
-        if (charIndex < roles[roleIndex].length) {
-            typedWordEl.textContent = roles[roleIndex].substring(0, charIndex + 1);
-            charIndex++;
-            setTimeout(type, typingSpeed);
-        } else {
-            typing = false;
-            const pause = roleIndex === 0 && loopCount === 1 ? 0 : (roleIndex === 0 ? delayBetween : 800);
-            setTimeout(type, pause);
-        }
-    } else {
-        if (charIndex > 0) {
-            typedWordEl.textContent = roles[roleIndex].substring(0, charIndex - 1);
-            charIndex--;
-            setTimeout(type, erasingSpeeds[roleIndex]);
-        } else {
-            typing = true;
-            roleIndex++;
-
-            if (roleIndex >= roles.length) {
-                roleIndex = 0;
-                loopCount++; // increment loop count when all roles cycled
-            }
-
-            setTimeout(type, typingSpeed);
-        }
-    }
-}
-
-document.addEventListener("DOMContentLoaded", type);
-</script>
-
-
 
 <!-- Bootstrap JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
 <script>
+    // Typing animation
+    const roles = ["Software Engineer", "Tennis Player", "Creative"];
+    const typingSpeed = 100;
+    const erasingSpeeds = [50, 30, 30];
+    const delayBetween = 2000;
+    let roleIndex = 0;
+    let charIndex = 0;
+    let typing = true;
+    let loopCount = 0;
+
+    const typedWordEl = document.getElementById("typed-word");
+
+    function type() {
+        if (loopCount === 1 && roleIndex === 0 && charIndex === roles[0].length) return;
+
+        if (typing) {
+            if (charIndex < roles[roleIndex].length) {
+                typedWordEl.textContent = roles[roleIndex].substring(0, charIndex + 1);
+                charIndex++;
+                setTimeout(type, typingSpeed);
+            } else {
+                typing = false;
+                const pause = roleIndex === 0 && loopCount === 1 ? 0 : (roleIndex === 0 ? delayBetween : 1200);
+                setTimeout(type, pause);
+            }
+        } else {
+            if (charIndex > 0) {
+                typedWordEl.textContent = roles[roleIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(type, erasingSpeeds[roleIndex]);
+            } else {
+                typing = true;
+                roleIndex++;
+                if (roleIndex >= roles.length) {
+                    roleIndex = 0;
+                    loopCount++;
+                }
+                setTimeout(type, typingSpeed);
+            }
+        }
+    }
+
     // Smooth scrolling for navigation links
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', function (e) {
@@ -819,7 +952,9 @@ document.addEventListener("DOMContentLoaded", type);
             } else {
                 const targetSection = document.querySelector(targetId);
                 if (targetSection) {
-                    targetSection.scrollIntoView({behavior: 'smooth'});
+                    const navHeight = document.querySelector('.navbar').offsetHeight;
+                    const targetPosition = targetSection.offsetTop - navHeight - 20;
+                    window.scrollTo({top: targetPosition, behavior: 'smooth'});
                 }
             }
         });
@@ -835,16 +970,17 @@ document.addEventListener("DOMContentLoaded", type);
         }
 
         // Update active nav link
-        const sections = ['hero', 'about', 'resume', 'portfolio', 'contact'];
+        const sections = ['hero', 'story', 'journey', 'passions', 'contact'];
         const navLinks = document.querySelectorAll('.nav-link');
 
         let current = 'hero';
+        const navHeight = navbar.offsetHeight;
 
         for (let section of sections) {
             const element = document.getElementById(section);
             if (element) {
                 const rect = element.getBoundingClientRect();
-                if (rect.top <= 100 && rect.bottom >= 100) {
+                if (rect.top <= navHeight + 100 && rect.bottom >= navHeight + 100) {
                     current = section;
                     break;
                 }
@@ -862,7 +998,7 @@ document.addEventListener("DOMContentLoaded", type);
     // Intersection Observer for fade-in animations
     const observerOptions = {
         threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        rootMargin: '0px 0px -100px 0px'
     };
 
     const observer = new IntersectionObserver(function (entries) {
@@ -877,14 +1013,33 @@ document.addEventListener("DOMContentLoaded", type);
         observer.observe(el);
     });
 
-    // Enhanced hover effects for portfolio items
-    document.querySelectorAll('.portfolio-item, .card, .contact-item').forEach(item => {
-        item.addEventListener('mouseenter', function () {
-            this.style.transform = 'translateY(-10px)';
+    // Resume download functionality
+    const downloadBtn = document.querySelector('#downloadResume');
+    downloadBtn.addEventListener('click', () => {
+        const link = document.createElement('a');
+        link.href = 'assets/Marija_Jovicic_Resume.pdf';
+        link.download = 'Marija_Jovicic_Resume.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+
+    // Initialize typing animation on page load
+    document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(type, 1000);
+    });
+
+    // Enhanced card animations
+    document.querySelectorAll('.story-card, .passion-card, .contact-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = this.classList.contains('passion-card') ?
+                'translateY(-10px) rotate(1deg)' : 'translateY(-15px)';
         });
 
-        item.addEventListener('mouseleave', function () {
-            this.style.transform = 'translateY(0)';
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) rotate(0deg)';
         });
     });
 </script>
+</body>
+</html>
