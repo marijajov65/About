@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marija Jovicic - Software Engineer</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-taupe: #483C32;
+            --secondary-taupe: #6B5B47;
+            --light-taupe: #8B7D6B;
+            --lightest-taupe: #A69B8A;
+            --cream: #F5F2ED;
+            --off-white: #FDFCF9;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --shadow: rgba(72, 60, 50, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--cream);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-taupe);
+            border-radius: 10px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .navbar.scrolled {
+            background: rgba(253, 252, 249, 0.95);
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: 1.8rem;
+            color: var(--primary-taupe) !important;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .navbar.scrolled .navbar-brand {
+            opacity: 1;
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 500;
+            margin: 0 1rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-taupe);
+            transition: width 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover::after,
+        .navbar-nav .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(72, 60, 50, 0.4);
+            z-index: -1;
+        }
+
+        .hero-content {
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .hero p {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: white;
+            margin-bottom: 0;
+            opacity: 0.9;
+        }
+
+        /* Remove geometric shapes */
+
+        /* Sections */
+        .section {
+            padding: 6rem 0;
+        }
+
+        .section:nth-child(even) {
+            background-color: var(--primary-beige);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: var(--dark-beige);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Cards */
+        .card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: all 0.3s ease;
+            background: var(--white);
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(139, 115, 85, 0.15);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--light-taupe), var(--primary-taupe));
+        }
+
+        .card-body {
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* Skill Items */
+        .skill-item {
+            background: var(--off-white);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: transform 0.3s ease;
+            text-align: center;
+            border: 1px solid var(--cream);
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-item h5 {
+            color: var(--primary-taupe);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-item p {
+            color: var(--text-light);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* Portfolio Items */
+        .portfolio-item {
+            background: var(--off-white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(72, 60, 50, 0.2);
+        }
+
+        .portfolio-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--light-taupe), var(--lightest-taupe));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .portfolio-image i {
+            font-size: 3rem;
+            color: var(--primary-taupe);
+            opacity: 0.8;
+        }
+
+        .portfolio-content {
+            padding: 1.5rem;
+        }
+
+        .portfolio-content h5 {
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-content p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Contact Items */
+        .contact-item {
+            background: var(--off-white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-item i {
+            font-size: 2.5rem;
+            color: var(--primary-taupe);
+            margin-bottom: 1rem;
+        }
+
+        .contact-item h5 {
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item a {
+            color: var(--primary-taupe);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--light-taupe);
+        }
+
+        /* Social Links */
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--light-taupe);
+            border-radius: 50%;
+            color: var(--off-white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin: 0 0.5rem;
+        }
+
+        .social-link:hover {
+            background: var(--primary-taupe);
+            color: var(--off-white);
+            transform: translateY(-3px);
+        }
+
+        /* Stats */
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-taupe);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes geometricFloat {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-20px) rotate(120deg);
+            }
+            66% {
+                transform: translateY(-10px) rotate(240deg);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 70vh;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg" id="navbar">
+    <div class="container">
+        <a class="navbar-brand" href="#hero">Marija</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#hero">Hello</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#resume">Resume</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#portfolio">Portfolio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="hero" class="hero">
+    <video class="hero-video" autoplay muted loop>
+        <source src="assets/video/bg_video.mp4" type="video/mp4">
+    </video>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center hero-content">
+                <h1>Marija Jovicic</h1>
+                <p><span id="typed-word">Software Engineer</span>based in Chicago</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="section">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>About Me</h2>
+            <p>
+                Full-time software engineer, former D1 tennis player, marathon survivor, and amateur painter.
+                Currently working on a certificate in UX design so I can make my apps slightly less confusing.
+            </p>
+        </div>
+
+        <div class="row align-items-start mb-5 fade-in">
+            <div class="col-lg-4 mb-4">
+                <div class="text-center">
+                    <img src="assets/img/profile-img.jpg" alt="Marija Jovicic" class="img-fluid rounded-4 shadow"
+                         style="max-height: 400px; object-fit: cover;">
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <h3 class="mb-3" style="color: var(--dark-beige);">Software Engineer @ Gelber Group</h3>
+                <p class="mb-3">At Gelber Group, I develop services, web apps, and desktop apps that support a wide
+                    range of users - from traders to compliance team. Being in the trading industry, a lot of my work
+                    involves careful handling of large streams of market data while guaranteeing correctness, high
+                    availability, and responsiveness.</p>
+
+                <div class="row g-3 mt-4">
+                    <div class="col-md-6">
+                        <div class="skill-item">
+                            <h5>Core Language</h5>
+                            <p>C# (.NET)</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="skill-item">
+                            <h5>Others</h5>
+                            <p>Python, JavaScript, React, Java, SQL</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="skill-item">
+                            <h5>Operating Systems</h5>
+                            <p>Windows & Linux</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="skill-item">
+                            <h5>Tools</h5>
+                            <p>Kafka, JetBrains suite, Jira, Confluence</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- But Also Section -->
+        <div class="row align-items-center mt-5 fade-in">
+            <div class="col-12 text-center mb-4">
+                <h3 style="color: var(--dark-beige);">But also...</h3>
+            </div>
+
+            <!-- Tennis -->
+            <div class="col-md-3 mb-4">
+                <div class="portfolio-item position-relative overflow-hidden rounded-4 shadow" style="cursor:pointer;">
+                    <img src="assets/img/tennis.jpg" alt="Tennis" class="img-fluid">
+                    <div class="portfolio-content position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center text-center"
+                         style="background: rgba(72,60,50,0.7); color: white; opacity: 0; transition: opacity 0.3s;">
+                        <h3>Former D1 College Tennis Player</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Marathon -->
+            <div class="col-md-3 mb-4">
+                <div class="portfolio-item position-relative overflow-hidden rounded-4 shadow" style="cursor:pointer;">
+                    <img src="assets/img/marathon.png" alt="Marathon" class="img-fluid">
+                    <div class="portfolio-content position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center text-center"
+                         style="background: rgba(72,60,50,0.7); color: white; opacity: 0; transition: opacity 0.3s;">
+                        <h3>San Francisco Marathon Finisher</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Art -->
+            <div class="col-md-3 mb-4">
+                <div class="portfolio-item position-relative overflow-hidden rounded-4 shadow" style="cursor:pointer;">
+                    <img src="assets/img/art.jpeg" alt="Art" class="img-fluid">
+                    <div class="portfolio-content position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center text-center"
+                         style="background: rgba(72,60,50,0.7); color: white; opacity: 0; transition: opacity 0.3s;">
+                        <h3>Amateur Painter</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Travel -->
+            <div class="col-md-3 mb-4">
+                <div class="portfolio-item position-relative overflow-hidden rounded-4 shadow" style="cursor:pointer;">
+                    <img src="assets/img/travel.jpeg" alt="Travel" class="img-fluid">
+                    <div class="portfolio-content position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center text-center"
+                         style="background: rgba(72,60,50,0.7); color: white; opacity: 0; transition: opacity 0.3s;">
+                        <h3>Traveler of 20+ countries</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hover Effect Script -->
+        <script>
+            document.querySelectorAll('.portfolio-item').forEach(item => {
+                const overlay = item.querySelector('.portfolio-content');
+                item.addEventListener('mouseenter', () => overlay.style.opacity = '1');
+                item.addEventListener('mouseleave', () => overlay.style.opacity = '0');
+            });
+        </script>
+    </div>
+</section>
+
+<!-- Resume Section -->
+<section id="resume" class="section">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>Experience & Education</h2>
+            <p>My professional journey and academic background</p>
+        </div>
+
+        <div class="row g-4 fade-in">
+            <div class="col-lg-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h4 class="card-title" style="color: var(--dark-beige);">Professional Experience</h4>
+                        <h5 class="mt-3">Software Engineer</h5>
+                        <p class="text-muted">2022 - Present | Gelber Group, Chicago, IL</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-chevron-right me-2" style="color: var(--dark-beige);"></i>Desktop
+                                trading platform UI development
+                            </li>
+                            <li class="mb-2"><i class="fas fa-chevron-right me-2" style="color: var(--dark-beige);"></i>Web
+                                dashboard for repo trading risk management
+                            </li>
+                            <li class="mb-2"><i class="fas fa-chevron-right me-2" style="color: var(--dark-beige);"></i>Algorithm for equitable allocation of resources across backtesting strategies
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h4 class="card-title" style="color: var(--dark-beige);">Education & Athletics</h4>
+                        <h5 class="mt-3">BS and MS in Computer Science</h5>
+                        <p class="text-muted">2017 - 2022 | Division I Tennis Scholarship</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-chevron-right me-2" style="color: var(--dark-beige);"></i>Full
+                                athletic scholarship recipient
+                            </li>
+                            <li class="mb-2"><i class="fas fa-chevron-right me-2" style="color: var(--dark-beige);"></i>Competed
+                                at NCAA Division I level
+                            </li>
+                            <li class="mb-2"><i class="fas fa-chevron-right me-2" style="color: var(--dark-beige);"></i>Strong
+                                foundation in algorithms and data structures
+                            </li>
+                            <li><i class="fas fa-chevron-right me-2" style="color: var(--dark-beige);"></i>Currently
+                                pursuing UX Design Certificate
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Portfolio Section -->
+<section id="portfolio" class="section">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>Recent Projects</h2>
+            <p>Cool stuff I work(ed) on</p>
+        </div>
+
+        <div class="row g-4 fade-in">
+            <div class="col-lg-4 col-md-6">
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h5>Desktop Trading Platform UI</h5>
+                        <p>Real-time trading interface with advanced charting and order management capabilities.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h5>Risk Management Dashboard</h5>
+                        <p>Web-based dashboard for monitoring and managing repo trading risks with real-time data
+                            visualization.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h5>Resource Allocation Algorithm</h5>
+                        <p>Fair allocation system for distributing computational resources across multiple backtesting
+                            strategies.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Contact Section -->
+<section id="contact" class="section">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>Let's Connect</h2>
+            <p>Let's chat about fun software projects, UX trends, new tennis stars, or cool art!</p>
+        </div>
+
+        <div class="row justify-content-center fade-in">
+            <div class="col-lg-8">
+                <div class="row g-4 text-center">
+                    <div class="col-md-4">
+                        <a href="mailto:marijajovicic65@gmail.com" class="text-decoration-none">
+                            <div class="contact-item p-5 shadow rounded h-100">
+                                <i class="fas fa-envelope fa-2x mb-3"></i>
+                                <h5>Email</h5>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4">
+                        <a href="https://www.linkedin.com/in/marijajovicic/" target="_blank"
+                           class="text-decoration-none">
+                            <div class="contact-item p-5 shadow rounded h-100">
+                                <i class="fab fa-linkedin fa-2x mb-3"></i>
+                                <h5>LinkedIn</h5>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4">
+                        <a href="https://github.com/marijajov65" target="_blank" class="text-decoration-none">
+                            <div class="contact-item p-5 shadow rounded h-100">
+                                <i class="fab fa-github fa-2x mb-3"></i>
+                                <h5>GitHub</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2025 Marija Jovicic. Crafted with passion and caffeine.</p>
+    </div>
+</footer>
+
+<style>
+/* Blinking cursor on the typed word */
+#typed-word::after {
+    content: "_";
+    display: inline-block;
+    margin-left: 2px;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0; }
+}
+</style>
+
+<script>
+const roles = ["Software Engineer", "Tennis Player", "Artist"];
+const typingSpeed = 100;
+const erasingSpeeds = [50, 30, 30];
+const delayBetween = 1500;
+let roleIndex = 0;
+let charIndex = 0;
+let typing = true;
+let loopCount = 0;
+
+const typedWordEl = document.getElementById("typed-word");
+
+function type() {
+    // stop if we finished the final Software Engineer
+    if (loopCount === 1 && roleIndex === 0 && charIndex === roles[0].length) return;
+
+    if (typing) {
+        if (charIndex < roles[roleIndex].length) {
+            typedWordEl.textContent = roles[roleIndex].substring(0, charIndex + 1);
+            charIndex++;
+            setTimeout(type, typingSpeed);
+        } else {
+            typing = false;
+            const pause = roleIndex === 0 && loopCount === 1 ? 0 : (roleIndex === 0 ? delayBetween : 800);
+            setTimeout(type, pause);
+        }
+    } else {
+        if (charIndex > 0) {
+            typedWordEl.textContent = roles[roleIndex].substring(0, charIndex - 1);
+            charIndex--;
+            setTimeout(type, erasingSpeeds[roleIndex]);
+        } else {
+            typing = true;
+            roleIndex++;
+
+            if (roleIndex >= roles.length) {
+                roleIndex = 0;
+                loopCount++; // increment loop count when all roles cycled
+            }
+
+            setTimeout(type, typingSpeed);
+        }
+    }
+}
+
+document.addEventListener("DOMContentLoaded", type);
+</script>
+
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#hero') {
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            } else {
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({behavior: 'smooth'});
+                }
+            }
+        });
+    });
+
+    // Navbar scroll effects
+    window.addEventListener('scroll', function () {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+
+        // Update active nav link
+        const sections = ['hero', 'about', 'resume', 'portfolio', 'contact'];
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        let current = 'hero';
+
+        for (let section of sections) {
+            const element = document.getElementById(section);
+            if (element) {
+                const rect = element.getBoundingClientRect();
+                if (rect.top <= 100 && rect.bottom >= 100) {
+                    current = section;
+                    break;
+                }
+            }
+        }
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Enhanced hover effects for portfolio items
+    document.querySelectorAll('.portfolio-item, .card, .contact-item').forEach(item => {
+        item.addEventListener('mouseenter', function () {
+            this.style.transform = 'translateY(-10px)';
+        });
+
+        item.addEventListener('mouseleave', function () {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+</script>
