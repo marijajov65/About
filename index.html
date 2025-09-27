@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marija Jovicic - Software Engineer</title>
-
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
     <!-- Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -213,6 +213,249 @@
             max-width: 700px;
             margin: 0 auto;
             line-height: 1.8;
+        }
+
+        /* Enhanced Story Section */
+        .story-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="%23A69B8A" opacity="0.08"/></pattern></defs><rect width="100%" height="100%" fill="url(%23dots)"/></svg>') repeat;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .story-photo-container {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .story-photo {
+            position: relative;
+            display: inline-block;
+        }
+
+        .story-photo img {
+            width: 350px;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 24px;
+            box-shadow: 0 25px 60px var(--shadow);
+            transition: all 0.5s ease;
+        }
+
+        .story-photo::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: 10px;
+            bottom: 10px;
+            border: 3px solid var(--accent-gold);
+            border-radius: 24px;
+            z-index: -1;
+            transition: all 0.5s ease;
+        }
+
+        .story-photo:hover img {
+            transform: translateY(-8px);
+        }
+
+        .story-photo:hover::before {
+            transform: translate(15px, 15px);
+        }
+
+        .story-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            background: var(--off-white);
+            padding: 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid var(--lightest-taupe);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px var(--shadow-light);
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-taupe);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .story-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        .story-paragraph {
+            background: var(--off-white);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--accent-gold);
+            box-shadow: 0 10px 30px var(--shadow-light);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateX(50px);
+        }
+
+        .story-paragraph.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .story-paragraph:hover {
+            transform: translateX(-10px);
+            box-shadow: 0 15px 40px var(--shadow);
+        }
+
+        .story-paragraph.highlighted {
+            background: linear-gradient(135deg, var(--off-white) 0%, var(--warm-white) 100%);
+            border-left-color: var(--primary-taupe);
+        }
+
+        .story-paragraph p {
+            margin: 0;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-medium);
+        }
+
+        .story-highlight {
+            color: var(--primary-taupe);
+            font-weight: 600;
+            position: relative;
+        }
+
+        .story-highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-gold), transparent);
+            opacity: 0.6;
+        }
+
+        .story-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .story-tab {
+            background: var(--lightest-taupe);
+            color: var(--text-dark);
+            border: none;
+            padding: 0.8rem 1.8rem;
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .story-tab.active {
+            background: var(--primary-taupe);
+            color: var(--off-white);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px var(--shadow);
+        }
+
+        .story-tab:hover:not(.active) {
+            background: var(--light-taupe);
+            transform: translateY(-2px);
+        }
+
+        .story-content-area {
+            min-height: 400px;
+        }
+
+        .story-content {
+            display: none;
+        }
+
+        .story-content.active {
+            display: block;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .experience-card {
+            background: var(--off-white);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--lightest-taupe);
+            transition: all 0.3s ease;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px var(--shadow);
+        }
+
+        .experience-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-taupe);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--off-white);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .experience-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-description {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            line-height: 1.6;
         }
 
         /* Story Cards */
@@ -507,6 +750,21 @@
             .navbar-nav .nav-link {
                 margin: 0.5rem 0;
             }
+
+            .story-photo img {
+                width: 100%;
+                max-width: 300px;
+                height: 350px;
+            }
+
+            .story-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .story-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
         }
 
         /* Passion Icons */
@@ -568,6 +826,22 @@
             color: var(--text-medium);
             line-height: 1.6;
         }
+
+        .hero {
+            height: 100vh; /* Full screen height */
+            overflow: hidden;
+        }
+
+        .hero-video {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
@@ -575,7 +849,8 @@
 <nav class="navbar navbar-expand-lg" id="navbar">
     <div class="container">
         <a class="navbar-brand" href="#hero">Marija</a>
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="color: var(--primary-taupe);">
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                style="color: var(--primary-taupe);">
             <i class="fas fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -601,12 +876,17 @@
 </nav>
 
 <!-- Hero Section -->
-<section id="hero" class="hero">
-    <div class="container">
+<section id="hero" class="hero position-relative" style="
+    background: url('assets/img/pejzaz.png') no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+">
+    <div class="container position-relative" style="z-index: 2;">
         <div class="row justify-content-center">
-            <div class="col-lg-10 text-center hero-content">
+            <div class="col-lg-10 text-center hero-content text-white">
                 <h1>Marija Jovicic</h1>
-                <p class="hero-subtitle"><span id="typed-word">Software Engineer</span> based in Chicago</p>
+                <p class="hero-subtitle" style="color: white"><span id="typed-word">Software Engineer</span> based in
+                    Chicago</p>
             </div>
         </div>
     </div>
@@ -615,97 +895,134 @@
 <!-- Story Section -->
 <section id="story" class="section">
     <div class="container">
-        <div class="section-title fade-in">
+        <div class="section-title fade-in text-center">
             <h2>My Story</h2>
             <p class="section-subtitle">
-                My path from college athlete to software engineer
+                <b>TL;DR</b>
+                Full time software engineer, former D1 tennis player, amateur painter and marathon survivor. Currently working on a certificate in UX design so I can make my apps slightly less confusing.
             </p>
         </div>
 
-        <div class="row g-4 fade-in">
-            <div class="col-lg-4">
-                <div class="story-card h-100">
-                    <div class="story-number">01</div>
-                    <h3 class="story-title">The Foundation</h3>
-                    <div class="story-period">2017 - 2022</div>
-                    <div class="story-content">
-                        At DePaul, I learned that the same focus I used on the tennis court worked in computer science classes too.
-                        Managing a full course load while training and competing taught me how to prioritize and work efficiently.
-                        <br><br>
-                        Ended up with a 4.0 GPA and some nice recognition, but more importantly,
-                        I figured out that I genuinely enjoyed solving technical problems and building things.
-                    </div>
+        <div class="row align-items-center fade-in">
+            <!-- Photo -->
+            <div class="col-lg-5 text-center">
+                <div class="story-photo">
+                    <img src="assets/img/profile-img.jpg" alt="Marija Jovicic" class="img-fluid rounded-3 shadow-lg">
                 </div>
             </div>
 
-            <div class="col-lg-4">
-                <div class="story-card h-100">
-                    <div class="story-number">02</div>
-                    <h3 class="story-title">The Exploration</h3>
-                    <div class="story-period">2019 - 2020</div>
-                    <div class="story-content">
-                        Two internships taught me different things. At Wintrust, I saw how software affects real people's finances,
-                        which made me care more about getting things right. The IAESTE exchange to Serbia was unexpected -
-                        working on medical applications in a different culture showed me how technology problems are universal.
-                        <br><br>
-                        Both experiences pushed me out of my comfort zone and helped me understand
-                        that good software isn't just about the code - it's about the people using it.
-                    </div>
+            <!-- Story Text -->
+            <div class="col-lg-7">
+                <div class="story-text">
+                    <p>
+                        Tennis has been a constant in my life for as long as I can remember.
+                        I spent 5 years competing in college at a Division I level, traveling from Thursdays through Sundays, and learning how to stay focused in school when everything else is chaos.
+                        Brain and body were not happy, but they did not quit, yet.
+                        Luckily, that persistence ended up sticking with me in everything else I do.</p>
+                    <p>
+                        These days, most of my energy goes into building software.
+                        It’s demanding in a different way than sports, but there’s a similar satisfaction in solving problems under pressure and keeping everything running when it matters.
+                        Lately I’ve been working on the Google UX Design certificate, because while I can make an application run, I’d also like people to actually enjoy using it — and maybe even understand it without a manual.
+                    </p>
+                    <p>
+                        When I need a break from logic, I turn to painting.
+                        I’m still figuring out my “style”.
+                        I went through a Marlon Brando-from-The-Godfather phase, then detoured into abstract art, and now I’m deep in a textured art obsession.
+                        The hero section of this site actually came from something I threw together in a painting program — I didn’t expect to like it, but here we are.
+                        A few more of my actual real painting pieces are below if you’re curious.
+                    </p>
+                    <p>
+                        This year I also ran the San Francisco Marathon.
+                        The course is basically one long uphill negotiation with yourself.
+                        Somewhere around the Golden Gate Bridge I started questioning my life choices, but finishing that race felt like one of the best decisions I’ve made.
+                    </p>
                 </div>
-            </div>
-
-            <div class="col-lg-4">
-                <div class="story-card h-100">
-                    <div class="story-number">03</div>
-                    <h3 class="story-title">The Evolution</h3>
-                    <div class="story-period">2022 - Present</div>
-                    <div class="story-content">
-                        At Gelber Group, I work on systems where performance actually matters.
-                        Trading happens fast, data streams are constant, and if something breaks, people notice immediately.
-                        <br><br>
-                        I've built desktop trading interfaces, web dashboards for risk management, and algorithms that
-                        distribute computing resources fairly. It's technical work that has real impact,
-                        and I like that combination of challenge and responsibility.
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Skills Grid -->
-        <div class="skills-grid fade-in">
-            <div class="skill-item">
-                <div class="skill-icon">
-                    <i class="fas fa-code"></i>
-                </div>
-                <div class="skill-title">Core Engineering</div>
-                <div class="skill-description">C# (.NET), Python, Java, JavaScript - Building robust, scalable applications</div>
-            </div>
-
-            <div class="skill-item">
-                <div class="skill-icon">
-                    <i class="fas fa-desktop"></i>
-                </div>
-                <div class="skill-title">Full-Stack Development</div>
-                <div class="skill-description">React frontends, WPF desktop apps, RESTful APIs, and database design</div>
-            </div>
-
-            <div class="skill-item">
-                <div class="skill-icon">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <div class="skill-title">Financial Technology</div>
-                <div class="skill-description">Real-time data processing, trading systems, risk management platforms</div>
-            </div>
-
-            <div class="skill-item">
-                <div class="skill-icon">
-                    <i class="fas fa-cogs"></i>
-                </div>
-                <div class="skill-title">System Architecture</div>
-                <div class="skill-description">Kafka streaming, microservices, high-availability system design</div>
             </div>
         </div>
     </div>
+</section>
+
+<!-- Student Content -->
+<div id="student" class="story-content">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="story-paragraph">
+                <p>Maintaining a <span class="story-highlight">4.0 GPA</span> in Computer Science while competing as a Division I athlete wasn't just about time management — it was about understanding that excellence in one area can fuel excellence in another.</p>
+            </div>
+            <div class="story-paragraph highlighted">
+                <p>As a <span class="story-highlight">Supplemental Instructor</span> for Discrete Math and Data Structures, I learned that understanding something deeply means being able to explain it simply. This skill became invaluable when writing documentation or mentoring junior developers.</p>
+            </div>
+            <div class="story-paragraph">
+                <p>The <span class="story-highlight">IAESTE exchange program</span> in Serbia opened my eyes to how different cultures approach problem-solving. Working on medical software applications showed me that good engineering isn't just about code — it's about the people who use it.</p>
+            </div>
+        </div>
+    </div>
+    <div class="experience-grid">
+        <div class="experience-card">
+            <div class="experience-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="experience-title">4.0 GPA</div>
+            <div class="experience-description">Perfect academic record in Computer Science while managing the demands of Division I athletics.</div>
+        </div>
+        <div class="experience-card">
+            <div class="experience-icon">
+                <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <div class="experience-title">Teaching Excellence</div>
+            <div class="experience-description">Mentored students in historically challenging CS courses, learning to break down complex concepts.</div>
+        </div>
+        <div class="experience-card">
+            <div class="experience-icon">
+                <i class="fas fa-globe"></i>
+            </div>
+            <div class="experience-title">Global Perspective</div>
+            <div class="experience-description">IAESTE exchange in Serbia provided international experience and cross-cultural collaboration skills.</div>
+        </div>
+    </div>
+</div>
+
+<!-- Engineer Content -->
+<div id="engineer" class="story-content">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="story-paragraph">
+                <p>At <span class="story-highlight">Gelber Group</span>, I work in high-frequency trading where microseconds matter. Every system I build needs to handle massive data streams while maintaining perfect accuracy — there's no room for "almost right."</p>
+            </div>
+            <div class="story-paragraph highlighted">
+                <p>I've developed everything from <span class="story-highlight">desktop applications</span> for traders to <span class="story-highlight">web dashboards</span> for compliance teams. Each project teaches me something new about balancing performance, usability, and reliability.</p>
+            </div>
+            <div class="story-paragraph">
+                <p>The most rewarding part isn't just solving technical challenges — it's seeing how the right solution can make someone's job easier or help them make better decisions. That's why I'm pursuing <span class="story-highlight">UX design certification</span> alongside my engineering work.</p>
+            </div>
+        </div>
+    </div>
+    <div class="experience-grid">
+        <div class="experience-card">
+            <div class="experience-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="experience-title">Trading Systems</div>
+            <div class="experience-description">High-performance applications processing real-time market data with microsecond precision requirements.</div>
+        </div>
+        <div class="experience-card">
+            <div class="experience-icon">
+                <i class="fas fa-desktop"></i>
+            </div>
+            <div class="experience-title">Full-Stack Development</div>
+            <div class="experience-description">Desktop apps, web interfaces, and backend services using C#, Python, JavaScript, and React.</div>
+        </div>
+        <div class="experience-card">
+            <div class="experience-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="experience-title">User-Centered Design</div>
+            <div class="experience-description">Pursuing UX certification to create software that's not just functional, but truly usable.</div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
 </section>
 
 <!-- Journey Section -->
@@ -714,7 +1031,7 @@
         <div class="section-title fade-in">
             <h2>Professional Journey</h2>
             <p class="section-subtitle">
-                Each step built on the last - from learning fundamentals to tackling real problems.
+                How we ended up here
             </p>
 
             <div class="text-center mt-4">
@@ -733,13 +1050,39 @@
                     <h4 style="color: var(--primary-taupe); margin-bottom: 0.5rem;">Software Engineer</h4>
                     <h6 style="color: var(--accent-gold); font-weight: 600;">Gelber Group • 2022 - Present</h6>
                     <p style="margin-top: 1rem;">
-                        Leading development of trading infrastructure and risk management systems.
-                        Building the tools that traders use to make decisions and ensuring data flows reliably.
+                        I develop services, web apps, and desktop apps that support a wide range of users - from traders
+                        to compliance team. Being in the trading industry, a lot of my work involves careful handling of
+                        large streams of market data while guaranteeing correctness, high availability, and
+                        responsiveness.
                     </p>
                     <div style="margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">Trading Systems</span>
-                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">Real-time Processing</span>
-                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">Algorithm Design</span>
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;"><b>C# (.NET)</b></span>
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">Python</span>
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">JavaScript</span>
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">React</span>
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">SQL</span>
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">Windows</span>
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">Linux</span>
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">Kafka</span>
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">JetBrains suite</span>
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">Jira</span>
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">Confluence</span>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h4 style="color: var(--primary-taupe); margin-bottom: 0.5rem;">Supplemental Instruction Mentor for
+                        Computer Science Leaders</h4>
+                    <h6 style="color: var(--accent-gold); font-weight: 600;">DePaul University • 2021 - 2022</h6>
+                    <p style="margin-top: 1rem;">
+                        I mentored a group of CS Supplemental Instructors to improve session quality, analyze and
+                        implement student feedback, and create a space where we can freely share experiences.
+                    </p>
+                    <div style="margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">Mentoring</span>
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">Leadership</span>
                     </div>
                 </div>
             </div>
@@ -747,14 +1090,16 @@
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <h4 style="color: var(--primary-taupe); margin-bottom: 0.5rem;">Academic Leadership</h4>
+                    <h4 style="color: var(--primary-taupe); margin-bottom: 0.5rem;">Supplemental Instructor for Discrete
+                        Math and Data Structures</h4>
                     <h6 style="color: var(--accent-gold); font-weight: 600;">DePaul University • 2019 - 2022</h6>
                     <p style="margin-top: 1rem;">
-                        Teaching computer science concepts to struggling students.
-                        Helped me understand how to explain technical ideas clearly and patiently.
+                        I facilitated reviews of computer science concepts for historically low success classes.
+                        This experience taught me how to explain technical ideas clearly and patiently, while adapting
+                        to different learning styles.
                     </p>
                     <div style="margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">Mentoring</span>
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">Data Structures</span>
                         <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">Technical Communication</span>
                     </div>
                 </div>
@@ -763,15 +1108,18 @@
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <h4 style="color: var(--primary-taupe); margin-bottom: 0.5rem;">Global Experience</h4>
+                    <h4 style="color: var(--primary-taupe); margin-bottom: 0.5rem;">Web Development Intern</h4>
                     <h6 style="color: var(--accent-gold); font-weight: 600;">Mihajlo Pupin Institute, Serbia • 2020</h6>
                     <p style="margin-top: 1rem;">
-                        International exchange program working on medical research applications.
-                        Good experience seeing how different teams approach technical problems.
+                        I participated in an IAESTE (International Association for the Exchange of Students for
+                        Technical Experience) internship program at the biggest and the oldest information and
+                        communication technologies institute in Southeastern Europe.
+                        My work was focused on developing the front end for an invoice analysis app.
                     </p>
                     <div style="margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">International Collaboration</span>
-                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">Medical Technology</span>
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">JavaScript</span>
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">HTML</span>
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; white-space: nowrap;">CSS</span>
                     </div>
                 </div>
             </div>
@@ -779,14 +1127,15 @@
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <h4 style="color: var(--primary-taupe); margin-bottom: 0.5rem;">Financial Technology Foundations</h4>
+                    <h4 style="color: var(--primary-taupe); margin-bottom: 0.5rem;">IT Application and Development
+                        Intern</h4>
                     <h6 style="color: var(--accent-gold); font-weight: 600;">Wintrust Financial • 2019</h6>
                     <p style="margin-top: 1rem;">
-                        My first deep dive into financial technology, where I learned that code isn't just logic—it's responsibility.
-                        Building credit checking systems taught me the importance of precision in finance.
+                        This was my first exposure to the fintech industry. I worked on a credit check application
+                        backend as well as front end testing.
                     </p>
                     <div style="margin-top: 1.5rem;">
-                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; margin-right: 0.5rem;">FinTech</span>
+                        <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; margin-right: 0.5rem;">Java</span>
                         <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; margin-right: 0.5rem;">Agile Development</span>
                         <span style="background: var(--lightest-taupe); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem;">Testing</span>
                     </div>
@@ -802,7 +1151,7 @@
         <div class="section-title fade-in">
             <h2>Beyond Code</h2>
             <p class="section-subtitle">
-                Things outside of work that keep me grounded and give me perspective.
+                I like doing things
             </p>
         </div>
 
@@ -860,7 +1209,7 @@
         <div class="section-title fade-in">
             <h2>Let's Connect</h2>
             <p class="section-subtitle">
-                Whether you want to talk tech, swap travel stories, or collaborate on something interesting - let's chat.
+                Whether you want to talk tech, tennis, art, travel or collaborate on something interesting - let's chat.
             </p>
         </div>
 
@@ -892,7 +1241,7 @@
 <!-- Footer -->
 <footer class="footer">
     <div class="container">
-        <p>&copy; 2025 Marija Jovicic. Crafted with precision, passion, and just the right amount of caffeine.</p>
+        <p>&copy; 2025 Marija Jovicic. Crafted with passion and black coffee with Trader Joe's oat milk creamer.</p>
     </div>
 </footer>
 
@@ -941,6 +1290,45 @@
             }
         }
     }
+
+    // Story tab functionality
+    const storyTabs = document.querySelectorAll('.story-tab');
+    const storyContents = document.querySelectorAll('.story-content');
+
+    storyTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Remove active class from all tabs and contents
+            storyTabs.forEach(t => t.classList.remove('active'));
+            storyContents.forEach(c => {
+                c.classList.remove('active');
+                c.style.display = 'none';
+            });
+
+            // Add active class to clicked tab
+            tab.classList.add('active');
+
+            // Show corresponding content
+            const targetStory = tab.getAttribute('data-story');
+            const targetContent = document.getElementById(targetStory);
+            if (targetContent) {
+                targetContent.style.display = 'block';
+                setTimeout(() => {
+                    targetContent.classList.add('active');
+                }, 50);
+            }
+
+            // Animate story paragraphs
+            const paragraphs = targetContent.querySelectorAll('.story-paragraph');
+            paragraphs.forEach((paragraph, index) => {
+                paragraph.style.opacity = '0';
+                paragraph.style.transform = 'translateX(50px)';
+                paragraph.classList.remove('visible');
+                setTimeout(() => {
+                    paragraph.classList.add('visible');
+                }, index * 200 + 100);
+            });
+        });
+    });
 
     // Smooth scrolling for navigation links
     document.querySelectorAll('.nav-link').forEach(link => {
@@ -1005,6 +1393,16 @@
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
+
+                // Special handling for story paragraphs
+                if (entry.target.classList.contains('story-text')) {
+                    const paragraphs = entry.target.querySelectorAll('.story-paragraph');
+                    paragraphs.forEach((paragraph, index) => {
+                        setTimeout(() => {
+                            paragraph.classList.add('visible');
+                        }, index * 200);
+                    });
+                }
             }
         });
     }, observerOptions);
@@ -1025,21 +1423,47 @@
     });
 
     // Initialize typing animation on page load
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         setTimeout(type, 1000);
+
+        // Initialize story paragraph animations for the default active tab
+        const activeContent = document.querySelector('.story-content.active');
+        if (activeContent) {
+            const paragraphs = activeContent.querySelectorAll('.story-paragraph');
+            paragraphs.forEach((paragraph, index) => {
+                setTimeout(() => {
+                    paragraph.classList.add('visible');
+                }, index * 300 + 1000);
+            });
+        }
     });
 
     // Enhanced card animations
-    document.querySelectorAll('.story-card, .passion-card, .contact-card').forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = this.classList.contains('passion-card') ?
-                'translateY(-10px) rotate(1deg)' : 'translateY(-15px)';
+    document.querySelectorAll('.story-card, .passion-card, .contact-card, .experience-card').forEach(card => {
+        card.addEventListener('mouseenter', function () {
+            if (this.classList.contains('passion-card')) {
+                this.style.transform = 'translateY(-10px) rotate(1deg)';
+            } else {
+                this.style.transform = 'translateY(-8px)';
+            }
         });
 
-        card.addEventListener('mouseleave', function() {
+        card.addEventListener('mouseleave', function () {
             this.style.transform = 'translateY(0) rotate(0deg)';
         });
     });
+
+    // Photo hover effects
+    const storyPhoto = document.querySelector('.story-photo');
+    if (storyPhoto) {
+        storyPhoto.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.02)';
+        });
+
+        storyPhoto.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+        });
+    }
 </script>
 </body>
 </html>
